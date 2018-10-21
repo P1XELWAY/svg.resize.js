@@ -372,6 +372,12 @@
             return;
         }
 
+        // To break resize event return false.
+        var before_resizing = this.el.fire('before_resizing', {event: event});
+
+        if (before_resizing._event.defaultPrevented)
+            return;
+
         // Calculate the difference between the mouseposition at start and now
         var txPt = this._extractPosition(event);
         var p = this.transformPoint(txPt.x, txPt.y);
@@ -427,10 +433,10 @@
             temp = [(this.parameters.box.x + diffX + (flag & 1 ? 0 : this.parameters.box.width)) % this.options.snapToGrid, (this.parameters.box.y + diffY + (flag & (1 << 1) ? 0 : this.parameters.box.height)) % this.options.snapToGrid];
         }
 
-        if (diffX < 0) {
+        if(diffX < 0) {
             temp[0] -= this.options.snapToGrid;
         }
-        if (diffY < 0) {
+        if(diffY < 0) {
             temp[1] -= this.options.snapToGrid;
         }
 
