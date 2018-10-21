@@ -341,6 +341,12 @@
             return;
         }
 
+        // To break resize event return false.
+        var before_resizing = this.el.fire('before_resizing', {event: event});
+
+        if (before_resizing._event.defaultPrevented)
+            return;
+
         // Calculate the difference between the mouseposition at start and now
         var txPt = this._extractPosition(event);
         var p = this.transformPoint(txPt.x, txPt.y);
