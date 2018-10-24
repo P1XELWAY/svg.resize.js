@@ -178,7 +178,38 @@
 
                         snap = this.checkAspectRatio(snap);
 
-                        this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y + snap[1]).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width - snap[0]
+                        );
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height - snap[1]
+                        );
+
+                        if (isLesserMinWidth && !isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.parameters.box.y + snap[1]
+                            ).size(this.options.minWidth, this.parameters.box.height - snap[1]);
+                            this.parameters.box.previewY = this.parameters.box.y + snap[1];
+                        } else if (!isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x + snap[0],
+                                this.el.y()
+                            ).size(this.parameters.box.width - snap[0], this.options.minHeight);
+                            this.parameters.box.previewX = this.parameters.box.x + snap[0];
+                        } else if (isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.el.y()
+                            ).size(this.options.minWidth, this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x + snap[0],
+                                this.parameters.box.y + snap[1]
+                            ).size(this.parameters.box.width - snap[0], this.parameters.box.height - snap[1]);
+                        }
                     }
                 };
                 break;
@@ -197,7 +228,38 @@
 
                         snap = this.checkAspectRatio(snap, true);
 
-                        this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).size(this.parameters.box.width + snap[0], this.parameters.box.height - snap[1]);
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width + snap[0]
+                        );
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height - snap[1]
+                        );
+
+                        if (isLesserMinWidth && !isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.parameters.box.y + snap[1]
+                            ).size(this.options.minWidth, this.parameters.box.height - snap[1]);
+                            this.parameters.box.previewY = this.parameters.box.y + snap[1];
+                        } else if (!isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.el.y()
+                            ).size(this.parameters.box.width + snap[0], this.options.minHeight);
+                            this.parameters.box.previewX = this.parameters.box.x;
+                        } else if (isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.el.y()
+                            ).size(this.options.minWidth, this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y + snap[1]
+                            ).size(this.parameters.box.width + snap[0], this.parameters.box.height - snap[1]);
+                        }
                     }
                 };
                 break;
@@ -216,7 +278,36 @@
 
                         snap = this.checkAspectRatio(snap);
 
-                        this.el.move(this.parameters.box.x, this.parameters.box.y).size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width + snap[0]
+                        );
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height + snap[1]
+                        );
+
+                        if (isLesserMinWidth && !isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).size(this.options.minWidth, this.parameters.box.height + snap[1]);
+                        } else if (!isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).size(this.parameters.box.width + snap[0], this.options.minHeight);
+                        } else if (isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).size(this.options.minWidth, this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).size(this.parameters.box.width + snap[0], this.parameters.box.height + snap[1]);
+                        }
                     }
                 };
                 break;
@@ -235,7 +326,38 @@
 
                         snap = this.checkAspectRatio(snap, true);
 
-                        this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y).size(this.parameters.box.width - snap[0], this.parameters.box.height + snap[1]);
+
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width - snap[0]
+                        );
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height + snap[1]
+                        );
+
+                        if (isLesserMinWidth && !isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.parameters.box.y
+                            ).size(this.options.minWidth, this.parameters.box.height + snap[1]);
+                        } else if (!isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x + snap[0],
+                                this.parameters.box.y
+                            ).size(this.parameters.box.width - snap[0], this.options.minHeight);
+                            this.parameters.box.previewX = this.parameters.box.x + snap[0];
+                        } else if (isLesserMinWidth && isLesserMinHeight) {
+                            this.el.move(
+                                this.el.x(),
+                                this.parameters.box.y
+                            ).size(this.options.minWidth, this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x + snap[0],
+                                this.parameters.box.y
+                            ).size(this.parameters.box.width - snap[0], this.parameters.box.height + snap[1]);
+                        }
                     }
                 };
                 break;
@@ -251,7 +373,22 @@
                             return;
                         }
 
-                        this.el.move(this.parameters.box.x, this.parameters.box.y + snap[1]).height(this.parameters.box.height - snap[1]);
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height - snap[1]
+                        );
+
+                        if (isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.el.y()
+                            ).height(this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y + snap[1]
+                            ).height(this.parameters.box.height - snap[1]);
+                        }
                     }
                 };
                 break;
@@ -266,7 +403,22 @@
                             return;
                         }
 
-                        this.el.move(this.parameters.box.x, this.parameters.box.y).width(this.parameters.box.width + snap[0]);
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width + snap[0]
+                        );
+
+                        if (isLesserMinWidth) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).width(this.options.minWidth);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).width(this.parameters.box.width + snap[0]);
+                        }
                     }
                 };
                 break;
@@ -281,7 +433,22 @@
                             return;
                         }
 
-                        this.el.move(this.parameters.box.x, this.parameters.box.y).height(this.parameters.box.height + snap[1]);
+                        var isLesserMinHeight = (
+                            this.options.minHeight &&
+                            this.options.minHeight > this.parameters.box.height + snap[1]
+                        );
+
+                        if (isLesserMinHeight) {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).height(this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x,
+                                this.parameters.box.y
+                            ).height(this.parameters.box.height + snap[1]);
+                        }
                     }
                 };
                 break;
@@ -296,7 +463,22 @@
                             return;
                         }
 
-                        this.el.move(this.parameters.box.x + snap[0], this.parameters.box.y).width(this.parameters.box.width - snap[0]);
+                        var isLesserMinWidth = (
+                            this.options.minWidth &&
+                            this.options.minWidth > this.parameters.box.width - snap[0]
+                        );
+
+                        if (isLesserMinWidth) {
+                            this.el.move(
+                                this.el.x(),
+                                this.parameters.box.y
+                            ).width(this.options.minHeight);
+                        } else {
+                            this.el.move(
+                                this.parameters.box.x + snap[0],
+                                this.parameters.box.y
+                            ).width(this.parameters.box.width - snap[0]);
+                        }
                     }
                 };
                 break;
@@ -524,7 +706,9 @@
         snapToAngle: 0.1,       // Specifies the speed the rotation is happening when moving the mouse
         snapToGrid: 1,          // Snaps to a grid of `snapToGrid` Pixels
         constraint: {},         // keep element within constrained box
-        saveAspectRatio: false  // Save aspect ratio when resizing using lt, rt, rb or lb points
+        saveAspectRatio: false, // Save aspect ratio when resizing using lt, rt, rb or lb points
+        minWidth: null,
+        minHeight: null
     };
 
 }).call(this);
